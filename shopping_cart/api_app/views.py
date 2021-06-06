@@ -67,3 +67,19 @@ class ShoppingCartUpdate(View):
         }
 
         return JsonResponse(data)
+    
+@method_decorator(csrf_exempt, name='dispatch')
+class ShoppingCartUpdate(View):
+
+    def patch(self, request, item_id):
+        ...
+
+    def delete(self, request, item_id):
+        item = CartItem.objects.get(id=item_id)
+        item.delete()
+
+        data = {
+            'message': f'Item {item_id} has been deleted'
+        }
+
+        return JsonResponse(data)
